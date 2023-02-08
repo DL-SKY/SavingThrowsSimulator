@@ -14,10 +14,10 @@ namespace Modules.Core.Initializing
                 UnityEngine.Debug.LogError($"Not found component with interface IInitializer");
         }
 
-        private void Awake()
+        private void Start()
         {
             var initializer = GetComponent<IInitializer>();
-            initializer.StartInitializing(OnCompleted, OnFailed);
+            initializer.Run(OnCompleted, OnFailed);
         }
 
         private void OnCompleted()
