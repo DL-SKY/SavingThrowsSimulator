@@ -7,7 +7,7 @@ namespace Modules.Core.Initializing.Subtasks
         public event Action<Subtask> OnComplete;
         public event Action<Subtask, int> OnError;
 
-        public abstract int Weight { get; protected set; }
+        public abstract int Weight { get; }
 
         public abstract void Run();
 
@@ -16,7 +16,7 @@ namespace Modules.Core.Initializing.Subtasks
             OnComplete?.Invoke(this);
         }
 
-        protected void Error(int errorCode)
+        protected void Fail(int errorCode)
         {
             OnError?.Invoke(this, errorCode);
         }

@@ -6,9 +6,12 @@ namespace Modules.Windows.Views
     public abstract class View : MonoBehaviour, IView
     {
         public IViewModel ViewModel { get { return GetViewModel(); } }
+        
         public bool IsAddToWindowsList => _isAddToWindowsList;
-
         [SerializeField] protected bool _isAddToWindowsList = true;
+
+        public bool IsUseEsc => _isUseEsc;
+        [SerializeField] protected bool _isUseEsc = true;
 
 
         protected virtual void OnDestroy()

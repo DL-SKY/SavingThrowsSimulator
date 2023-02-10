@@ -1,5 +1,6 @@
 using Modules.Windows.ViewModels;
 using Modules.Windows.Views;
+using Modules.Windows.Views.Preloaders;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,13 @@ namespace Modules.Windows.Manager
             InitializeLayersDictionary();
         }
 
+        private void Update()
+        {
+            //Back button
+            if (Input.GetKeyDown(KeyCode.Escape))
+                TryCloseCurrentWindow();
+        }
+
 
         public T OpenWindow<T>(string path, WindowLayer layer, IViewModel viewModel) where T : View
         {
@@ -57,6 +65,16 @@ namespace Modules.Windows.Manager
             _windows.Remove(window);
         }
 
+        public void CloseWindow(Type type)
+        {
+            foreach (var window in _windows)
+                if (window.GetType() == type)
+                {
+                    CloseWindow(window);
+                    return;
+                }
+        }
+
 
         private void InitializeLayersDictionary()
         {
@@ -75,6 +93,13 @@ namespace Modules.Windows.Manager
                 return _layers[layer];
             else
                 return transform;
+        }
+
+        private void TryCloseCurrentWindow()
+        {
+            if (_windows.Count > 0)
+                if (_windows[_windows.Count - 1].IsUseEsc)
+                    CloseWindow(_windows[_windows.Count - 1]);
         }
     }
 }

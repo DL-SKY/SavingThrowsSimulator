@@ -7,6 +7,7 @@ namespace Modules.Windows.Views
     {
         IViewModel ViewModel { get; }
         bool IsAddToWindowsList { get; }
+        bool IsUseEsc { get; }
 
         void Init(IViewModel viewModel);
         void OnClose();

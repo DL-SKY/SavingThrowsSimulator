@@ -24,6 +24,11 @@ namespace Modules.Windows.ViewModels
         }
 
 
-        public abstract void Dispose();        
+        public abstract void Dispose();
+
+        protected void SendOnChange()
+        {
+            OnChange?.Invoke();
+        }
     }
 }

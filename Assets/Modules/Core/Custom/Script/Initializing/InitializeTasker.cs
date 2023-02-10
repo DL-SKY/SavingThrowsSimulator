@@ -8,6 +8,8 @@ namespace Modules.Core.Custom.Initializing
 {
     public class InitializeTasker : MonoBehaviour, IInitializer
     {
+        public event Action<int, int> OnProgressChange;
+
         private List<Subtask> _before = new List<Subtask>();
         private List<Subtask> _tasks = new List<Subtask>();
         private List<Subtask> _after = new List<Subtask>();
@@ -16,6 +18,9 @@ namespace Modules.Core.Custom.Initializing
         private Action _completedCallback;
         private Action<int> _failedCallback;
 
+        private int _currentProgress;
+        private int _maxProgress;
+        
 
         private void OnDestroy()
         {
@@ -35,6 +40,10 @@ namespace Modules.Core.Custom.Initializing
 
             _tasks = CreateTasks();
             _currentTaskIndex = 0;
+            _currentProgress = 0;
+            _maxProgress = 0;
+            foreach (var task in _tasks)
+                _maxProgress += task.Weight;
 
             TryStartTask();
         }
@@ -86,6 +95,9 @@ namespace Modules.Core.Custom.Initializing
             task.OnError -= OnErrorHandler;
 
             _currentTaskIndex++;
+            _currentProgress += task.Weight;
+            OnProgressChange?.Invoke(_currentProgress, _maxProgress);
+
             TryStartTask();
         }
 
