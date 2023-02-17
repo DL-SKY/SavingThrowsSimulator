@@ -47,6 +47,10 @@ namespace Modules.StarterKIT.Services
             if (_components.ContainsKey(type))
                 return (T)_components[type];
 
+            foreach (var key in _components.Keys)
+                if (key.IsSubclassOf(type))
+                    return (T)_components[key];
+
             return default;
         }
 

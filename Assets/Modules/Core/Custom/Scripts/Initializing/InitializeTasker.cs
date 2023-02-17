@@ -1,5 +1,7 @@
 using Modules.Core.Initializing;
 using Modules.Core.Initializing.Subtasks;
+using Modules.DataBase;
+using Modules.StarterKIT.Services;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,6 +68,8 @@ namespace Modules.Core.Custom.Initializing
             tasks.AddRange(_before);
 
             //TODO!!!!!!!!
+            //tasks.Add(new LoadDataBaseTask(_dataBaseManager));
+            tasks.Add(new LoadDataBaseTask(ComponentLocator.Resolve<DataBaseManager>()));
             //...
 
             tasks.AddRange(_after);

@@ -41,22 +41,22 @@ namespace Modules.Windows.Custom.ViewModels
                 {
                     //Top
                     case 0:
-                        anchors.Set(new Vector2(), new Vector2());
+                        anchors.Set(new Vector2(0.0f, _viewportRect.y + _viewportRect.height), new Vector2(1.0f, 1.0f));
                         break;
 
                     //Right
                     case 1:
-                        anchors.Set(new Vector2(), new Vector2());
+                        anchors.Set(new Vector2(_viewportRect.x + _viewportRect.width, _viewportRect.y), new Vector2(1.0f, _viewportRect.y + _viewportRect.height));
                         break;
 
                     //Botton
                     case 2:
-                        anchors.Set(new Vector2(), new Vector2());
+                        anchors.Set(new Vector2(0.0f, 0.0f), new Vector2(1.0f, _viewportRect.y));
                         break;
 
                     //Left
                     case 3:
-                        anchors.Set(new Vector2(), new Vector2());
+                        anchors.Set(new Vector2(0.0f, _viewportRect.y), new Vector2(_viewportRect.x, _viewportRect.y + _viewportRect.height));
                         break;
                 }
                 result[i] = anchors;

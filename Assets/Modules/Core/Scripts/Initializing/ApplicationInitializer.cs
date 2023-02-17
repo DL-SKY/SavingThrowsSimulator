@@ -2,6 +2,8 @@ using Modules.Core.Application.Settings;
 using Modules.Core.Initializing.Subtasks;
 using Modules.StarterKIT.Components.Services;
 using Modules.StarterKIT.Services;
+using Modules.Windows.Custom.ViewModels;
+using Modules.Windows.Custom.Views;
 using Modules.Windows.Manager;
 using Modules.Windows.Views.Preloaders;
 using System;
@@ -50,6 +52,13 @@ namespace Modules.Core.Initializing
         {
             UnityEngine.Debug.LogError($"[ApplicationInitializer] OnCompleted()");
             //TODO
+
+            //...
+            var windowsManager = ComponentLocator.Resolve<WindowsManager>();
+            var viewModel = new CameraViewportRectViewModel(Camera.main.rect);
+            var path = "CameraViewportRectView";
+            windowsManager.OpenWindow<CameraViewportRectView>(path, WindowLayer.Dialog, viewModel);
+            //...
         }
 
         private void OnFailed(int errorCode)
@@ -63,7 +72,7 @@ namespace Modules.Core.Initializing
             var tasks = new List<Subtask>();
 
             var windowsManager = ComponentLocator.Resolve<WindowsManager>();
-            tasks.Add(new ShowPreloaderViewTask(windowsManager, PRELOADER_PATH));
+            tasks.Add(new ShowPreloaderViewTask(windowsManager, PRELOADER_PATH));            
 
             return tasks;
         }
@@ -74,11 +83,11 @@ namespace Modules.Core.Initializing
 
             var updater = ComponentLocator.Resolve<Updater>();
             //todo: temp ======
-            for (int i = 0; i < 10; i++)
-                tasks.Add(new PauseTask(updater, 0.5f, 1));
+            for (int i = 0; i < 2; i++)
+                tasks.Add(new PauseTask(updater, 0.1f, 1));
             //=================
 
-            tasks.Add(new PauseTask(updater, 2.5f));
+            tasks.Add(new PauseTask(updater, 0.1f));
 
             var windowsManager = ComponentLocator.Resolve<WindowsManager>();
             tasks.Add(new CloseViewTask(windowsManager, typeof(PreloaderView)));
