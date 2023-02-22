@@ -1,0 +1,12 @@
+{
+	"SpeedPointsPerTurn": 10,
+	"MaxSpeedPoints": 20,
+	"ActionPointsPerTurn": 10,
+	"MaxActionPoints": 10,
+	
+	"Visual": 
+	{
+		"Prefabs": [
+		]
+	}
+}

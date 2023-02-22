@@ -2,8 +2,6 @@ using Modules.Core.Application.Settings;
 using Modules.Core.Initializing.Subtasks;
 using Modules.StarterKIT.Components.Services;
 using Modules.StarterKIT.Services;
-using Modules.Windows.Custom.ViewModels;
-using Modules.Windows.Custom.Views;
 using Modules.Windows.Manager;
 using Modules.Windows.Views.Preloaders;
 using System;
@@ -32,6 +30,11 @@ namespace Modules.Core.Initializing
                 UnityEngine.Debug.LogError($"Not found component with interface IInitializer");
         }
 
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+        }
+
         private void Start()
         {
             _initializer = GetComponent<IInitializer>();
@@ -54,11 +57,9 @@ namespace Modules.Core.Initializing
             //TODO
 
             //...
-            var windowsManager = ComponentLocator.Resolve<WindowsManager>();
-            var viewModel = new CameraViewportRectViewModel(Camera.main.rect);
-            var path = "CameraViewportRectView";
-            windowsManager.OpenWindow<CameraViewportRectView>(path, WindowLayer.Dialog, viewModel);
-            //...
+            
+
+            Destroy(this.gameObject);
         }
 
         private void OnFailed(int errorCode)
@@ -89,8 +90,8 @@ namespace Modules.Core.Initializing
 
             tasks.Add(new PauseTask(updater, 0.1f));
 
-            var windowsManager = ComponentLocator.Resolve<WindowsManager>();
-            tasks.Add(new CloseViewTask(windowsManager, typeof(PreloaderView)));
+            //var windowsManager = ComponentLocator.Resolve<WindowsManager>();
+            //tasks.Add(new CloseViewTask(windowsManager, typeof(PreloaderView)));
 
             return tasks;
         }

@@ -71,6 +71,8 @@ namespace Modules.Core.Custom.Initializing
             //tasks.Add(new LoadDataBaseTask(_dataBaseManager));
             tasks.Add(new LoadDataBaseTask(ComponentLocator.Resolve<DataBaseManager>()));
             //...
+            tasks.Add(new LoadSceneTask("Dungeon"));
+            //...
 
             tasks.AddRange(_after);
 
