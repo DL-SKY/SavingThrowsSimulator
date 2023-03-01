@@ -9,7 +9,7 @@ namespace Modules.Dungeons.Movement
         /// <summary>
         /// int, Vector2 => Id, NewPosition
         /// </summary>
-        event Action<int, Vector2> OnChangePosition;
+        event Action<int, Vector2> OnPositionChange;
 
         Vector2 Position { get; }
 

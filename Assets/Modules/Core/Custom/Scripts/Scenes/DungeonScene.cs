@@ -27,8 +27,7 @@ namespace Modules.Core.Custom.Scenes
 
         private void OnDestroy()
         {
-            HideRectView();
-            _dungeon.Dispose();
+            HideRectView();            
         }
 
         private void ShowRectView()
@@ -47,7 +46,11 @@ namespace Modules.Core.Custom.Scenes
 
         private void DungeonInit()
         {
-            _dungeon.Init();
+            //TODO: config
+            var config1 = "";
+            var config2 = "";
+
+            _dungeon.Init(config1, config2);
         }
 
         private void HidePreloader()

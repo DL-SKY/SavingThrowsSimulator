@@ -7,8 +7,8 @@ namespace Modules.Dungeons.Entities
 {
     public abstract class Entity : IMoveable, IDamageable
     {
-        public event Action<int, Vector2> OnChangePosition;
-        public event Action<int, int, int> OnChangeHitPoints;
+        public event Action<int, Vector2> OnPositionChange;
+        public event Action<int, int, int> OnHitPointsChange;
         public event Action<int> OnDying;
 
         //IEntity
@@ -34,7 +34,7 @@ namespace Modules.Dungeons.Entities
         public void SetPosition(Vector2 position)
         {
             Position = position;
-            OnChangePosition?.Invoke(Id, Position);
+            OnPositionChange?.Invoke(Id, Position);
         }
 
         public void Move(Vector2 direction)
@@ -45,7 +45,7 @@ namespace Modules.Dungeons.Entities
         public void SetHitPoints(int value)
         {
             CurrentHitPoints = GetValidatedHitPoints(value);
-            OnChangeHitPoints?.Invoke(Id, CurrentHitPoints, MaxHitPoints);
+            OnHitPointsChange?.Invoke(Id, CurrentHitPoints, MaxHitPoints);
 
             if (IsDead)
                 OnDying?.Invoke(Id);

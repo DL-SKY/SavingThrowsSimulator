@@ -8,7 +8,7 @@ namespace Modules.Dungeons.Damage
         /// <summary>
         /// int, int, int => Id, CurrentHP, MaxHP
         /// </summary>
-        event Action<int, int, int> OnChangeHitPoints;
+        event Action<int, int, int> OnHitPointsChange;
 
         /// <summary>
         /// int => Id
