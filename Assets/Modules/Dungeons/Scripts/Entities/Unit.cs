@@ -14,7 +14,7 @@ namespace Modules.Dungeons.Entities
         public override int MaxHitPoints => _data.MaxHitPoints;
 
 
-        public Unit(int id, string configId, UnitData data) : base(id, configId)
+        public Unit(int id, UnitData data) : base(id, data.Id)
         {
             _data = data;
 

@@ -18,8 +18,12 @@ namespace Modules.Dungeons.Movement
 
         bool IsMoving { get; }
         Vector2 Position { get; }
+        float Angle { get; }
 
         void SetPosition(Vector2 position, bool isTeleportation);
         void StartMove(Vector2 direction);
+
+        void SetAngle(float angle, bool isTeleportation);
+        void StartRotate(float deltaAngle);
     }
 }

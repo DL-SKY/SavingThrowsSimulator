@@ -17,7 +17,7 @@ namespace Modules.Dungeons.Creators
         public T Create<T>(int id) where T : Entity
         {
             //TODO: use correct type. Factory
-            var u = new Unit(id, id.ToString(), _db.Units["Default"]);
+            var u = new Unit(id, _db.Units["Default"]);
             return u as T;
         }
     }

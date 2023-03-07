@@ -11,9 +11,6 @@ namespace Modules.Dungeons.Controllers
 {
     public class Dungeon : MonoBehaviour, IDisposable
     {
-        [SerializeField] private float _angle;
-
-
         public event Action<EnumCellType[,]> OnDungeonCreate;
         public event Action<Entity> OnEntityCreate;
 
@@ -31,20 +28,28 @@ namespace Modules.Dungeons.Controllers
         //mb implementing visual in other class?
         //...
 
+        private DataBaseManager _db;
+
 
         private void Update()
         {
             foreach (var entity in _allEntities.Values)
             {
-                //TODO: debug
+                //TODO: debug move
                 if (Input.GetKeyDown(KeyCode.A))
-                    entity.StartMove(GetPos(_angle, Vector2.left));
+                    entity.StartMove(GetPos(entity.Angle, Vector2.left));
                 if (Input.GetKeyDown(KeyCode.D))
-                    entity.StartMove(GetPos(_angle, Vector2.right));
+                    entity.StartMove(GetPos(entity.Angle, Vector2.right));
                 if (Input.GetKeyDown(KeyCode.W))
-                    entity.StartMove(GetPos(_angle, Vector2.up));
+                    entity.StartMove(GetPos(entity.Angle, Vector2.up));
                 if (Input.GetKeyDown(KeyCode.S))
-                    entity.StartMove(GetPos(_angle, Vector2.down));
+                    entity.StartMove(GetPos(entity.Angle, Vector2.down));
+
+                //todo: debug rotation
+                if (Input.GetKeyDown(KeyCode.Q))
+                    entity.StartRotate(90.0f);
+                if (Input.GetKeyDown(KeyCode.E))
+                    entity.StartRotate(-90.0f);
 
                 Vector2 GetPos(float angle, Vector2 vector)
                 {
@@ -67,6 +72,8 @@ namespace Modules.Dungeons.Controllers
         public void Init(object dungeonConfig, object entitiesConfig)
         {
             UnityEngine.Debug.LogError($"Dungeon.Init()");
+
+            _db = ComponentLocator.Resolve<DataBaseManager>();
 
             _lastId = 0;
             _allEntities.Clear();
@@ -91,7 +98,7 @@ namespace Modules.Dungeons.Controllers
 
         public Dungeon CreateEntities(object config)
         {
-            var creator = new UnitCreator(ComponentLocator.Resolve<DataBaseManager>());
+            var creator = new UnitCreator(_db);
 
             //...
             var unit = creator.Create<Unit>(++_lastId);
