@@ -7,6 +7,11 @@ namespace Modules.DataBase.Custom.Datas
     public class UnitData : DataBaseData
     {
         /// <summary>
+        /// HitPoints unit
+        /// </summary>
+        public int MaxHitPoints;
+
+        /// <summary>
         /// Points per turn = this is how many points are given at the beginning of the turn
         /// Cells per turn = [ SpeedPoints (ActionPoints) / GameplayData.ActionCost ]
         /// </summary>

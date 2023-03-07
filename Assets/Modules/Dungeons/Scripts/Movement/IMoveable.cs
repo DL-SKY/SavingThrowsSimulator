@@ -11,9 +11,15 @@ namespace Modules.Dungeons.Movement
         /// </summary>
         event Action<int, Vector2> OnPositionChange;
 
+        /// <summary>
+        /// int => Id
+        /// </summary>
+        event Action<int> OnMoveDone;
+
+        bool IsMoving { get; }
         Vector2 Position { get; }
 
-        void SetPosition(Vector2 position);
-        void Move(Vector2 direction);
+        void SetPosition(Vector2 position, bool isTeleportation);
+        void StartMove(Vector2 direction);
     }
 }

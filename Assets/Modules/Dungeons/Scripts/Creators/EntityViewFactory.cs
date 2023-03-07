@@ -18,7 +18,10 @@ namespace Modules.Dungeons.Creators
         private static UnitView CreateUnitView(Unit unit)
         {
             var prefab = Resources.Load<UnitView>("TmpUnit");
-            return GameObject.Instantiate<UnitView>(prefab);
+            var view = GameObject.Instantiate<UnitView>(prefab);
+            view.Init(unit);
+
+            return view;
         }
     }
 }

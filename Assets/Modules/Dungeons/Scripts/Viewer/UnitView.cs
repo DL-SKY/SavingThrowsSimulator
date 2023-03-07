@@ -35,7 +35,7 @@ namespace Modules.Dungeons.Viewer
 
         protected override void OnPositionChangeHandler(int id, Vector2 position)
         {
-
+            transform.position = new Vector3(position.x, transform.position.y, position.y);
         }
 
         protected override void OnDyingHandler(int id)

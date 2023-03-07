@@ -1,4 +1,5 @@
 {
+	"MaxHitPoints": 10,
 	"SpeedPointsPerTurn": 10,
 	"MaxSpeedPoints": 20,
 	"ActionPointsPerTurn": 10,

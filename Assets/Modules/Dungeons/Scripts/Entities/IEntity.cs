@@ -4,5 +4,7 @@ namespace Modules.Dungeons.Entities
     {
         int Id { get; }
         string ConfigId { get; }
+
+        void Update(float deltaTime);
     }
 }

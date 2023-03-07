@@ -1,18 +1,23 @@
-﻿using Modules.Dungeons.Entities;
+﻿using Modules.Custom.DataBase;
+using Modules.Dungeons.Entities;
 
 namespace Modules.Dungeons.Creators
 {
     public class UnitCreator
     {
-        public UnitCreator()
-        { 
+        private DataBaseManager _db;
+
+
+        public UnitCreator(DataBaseManager db)
+        {
             //reserved
+            _db = db;
         }
 
         public T Create<T>(int id) where T : Entity
         {
             //TODO: use correct type. Factory
-            var u = new Unit(id, id.ToString(), new DataBase.Custom.Datas.UnitData());
+            var u = new Unit(id, id.ToString(), _db.Units["Default"]);
             return u as T;
         }
     }
