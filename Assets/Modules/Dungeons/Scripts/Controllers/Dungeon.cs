@@ -106,6 +106,8 @@ namespace Modules.Dungeons.Controllers
             _allEntities.Add(unit.Id, unit);
             //...
 
+            unit.OnMoveDone += OnMoveDoneHandler;
+
             OnEntityCreate?.Invoke(unit);
 
             return this;
@@ -121,7 +123,20 @@ namespace Modules.Dungeons.Controllers
 
         public void Dispose()
         {
-            //...
+            //TODO...
+
+            foreach (var entity in _allEntities.Values)
+                entity.OnMoveDone -= OnMoveDoneHandler;
+        }
+
+
+        private void OnMoveDoneHandler(int id)
+        {
+            //Add check battle
+
+            var entity = _allEntities[id];
+            if (!entity.CheckSpeedPoints())
+                entity.RefreshSpeedPoints();
         }
     }
 }
